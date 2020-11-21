@@ -76,7 +76,12 @@ class App extends Component {
           <p>Loading...</p>
         ) : (
           <>
-            <label>Search Products</label>
+            <label className="search-products">Search Products</label>
+
+            <div className="labels">
+              <label className="first-label">Product Name</label>
+              <label className="second-label">Price Range</label>
+            </div>
 
             <div>
               <input

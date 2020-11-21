@@ -82,3 +82,26 @@ body {
   padding-top: 15px;
   width: 55% !important;
 }
+
+.input-range__label-container {
+  color: black;
+}
+
+.search-products {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.labels {
+  padding-bottom: 10px !important;
+}
+
+.first-label {
+  flex: 0.38;
+}
+
+.second-label {
+  flex: 0.55;
+}
