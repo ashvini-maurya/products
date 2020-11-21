@@ -76,15 +76,9 @@ body {
   border-radius: 4px;
   line-height: 24px;
   outline: none;
-  /* width: 49%; */
 }
 
 .input-range {
   padding-top: 15px;
   width: 55% !important;
 }
-
-/* 
-.grid-container {
-  display: grid;
-} */

@@ -10,7 +10,7 @@ class App extends Component {
     products: [],
     search: "",
     loading: false,
-    value: { min: 0, max: 14 },
+    value: {},
   };
 
   componentDidMount() {
@@ -36,9 +36,20 @@ class App extends Component {
 
       result.sort((a, b) => a.name.localeCompare(b.name));
 
+      const unitPriceMinObj = result?.reduce((prev, curr) => {
+        return prev.unitPrice < curr.unitPrice ? prev : curr;
+      });
+      const unitPriceMin = unitPriceMinObj.unitPrice;
+
+      const unitPriceObj = result?.reduce((prev, curr) => {
+        return prev.unitPrice > curr.unitPrice ? prev : curr;
+      });
+      const unitPriceMax = unitPriceObj.unitPrice;
+
       this.setState({
         product: result,
         loading: false,
+        value: { min: unitPriceMin, max: unitPriceMax },
       });
     };
     getProducts();
@@ -77,12 +88,14 @@ class App extends Component {
                   this.setState({ search: event.target.value })
                 }
               />
-              <InputRange
-                minValue={0}
-                maxValue={14}
-                value={this.state.value}
-                onChange={(value) => this.setState({ value })}
-              />
+              {this.state.value?.max ? (
+                <InputRange
+                  minValue={0}
+                  maxValue={14}
+                  value={this.state.value}
+                  onChange={(value) => this.setState({ value })}
+                />
+              ) : null}
             </div>
 
             <table>
