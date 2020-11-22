@@ -23,7 +23,6 @@ const ProductFilter = (props) => (
           minValue={0}
           maxValue={14}
           value={props.value}
-          // onChange={(value) => this.setState({ value })}
           onChange={(value) => props.rangeChangeHandler(value)}
         />
       ) : null}
