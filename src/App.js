@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./App.css";
-import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
 import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
 import Products from "./components/Products/Products";
+import ProductFilter from "./components/ProductFilter/ProductFilter";
 
 class App extends Component {
   state = {
@@ -68,6 +68,14 @@ class App extends Component {
         item.unitPrice >= this.state.value.min
     );
 
+    const inputChangeHandler = (event) => {
+      this.setState({ search: event.target.value });
+    };
+
+    const rangeChangeHandler = (value) => {
+      this.setState({ value });
+    };
+
     return (
       <>
         <div className="product-list">
@@ -75,33 +83,12 @@ class App extends Component {
             <p>Loading...</p>
           ) : (
             <>
-              <label className="search-products">Search Products</label>
-
-              <div className="labels">
-                <label className="first-label">Product Name</label>
-                <label className="second-label">Price Range</label>
-              </div>
-
-              <div>
-                <input
-                  type="text"
-                  value={this.state.search}
-                  name="search"
-                  placeholder="Search by Product"
-                  onChange={(event) =>
-                    this.setState({ search: event.target.value })
-                  }
-                />
-                {this.state.value?.max ? (
-                  <InputRange
-                    minValue={0}
-                    maxValue={14}
-                    value={this.state.value}
-                    onChange={(value) => this.setState({ value })}
-                  />
-                ) : null}
-              </div>
-
+              <ProductFilter
+                search={this.state.search}
+                value={this.state.value}
+                inputChangeHandler={inputChangeHandler}
+                rangeChangeHandler={rangeChangeHandler}
+              />
               <Products products={products} />
             </>
           )}
