@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import "./App.css";
 import InputRange from "react-input-range";
 import "react-input-range/lib/css/index.css";
-import InfiniteScroll from "./components/InfiniteScroll";
+import InfiniteScroll from "./components/InfiniteScroll/InfiniteScroll";
+import Products from "./components/Products/Products";
 
-const formatNumber = (number) =>
-  new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(number);
 class App extends Component {
   state = {
     products: [],
@@ -69,8 +68,6 @@ class App extends Component {
         item.unitPrice >= this.state.value.min
     );
 
-    let total = 0;
-
     return (
       <>
         <div className="product-list">
@@ -105,34 +102,7 @@ class App extends Component {
                 ) : null}
               </div>
 
-              <table>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Unit Price</th>
-                    <th>Revenue</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products?.map((item, index) => {
-                    total = total + item.unitPrice * item.sold;
-                    return (
-                      <tr key={item.name}>
-                        <td>{item.name}</td>
-                        <td>{item.unitPrice}</td>
-                        <td>{formatNumber(item.unitPrice * item.sold)}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td>Total</td>
-                    <td></td>
-                    <td>{formatNumber(total)}</td>
-                  </tr>
-                </tfoot>
-              </table>
+              <Products products={products} />
             </>
           )}
         </div>

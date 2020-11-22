@@ -15,7 +15,6 @@ const InfiniteScroll = () => {
       (entries) => {
         const firstEntry = entries[0];
         const y = firstEntry.boundingClientRect.y;
-        console.log(prevY.current, y); // check
 
         if (prevY.current > y) {
           setTimeout(() => loadMore(), 1000);
